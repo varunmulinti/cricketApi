@@ -1,4 +1,4 @@
-var cricketApp = angular.module('cricApi', ['ngResource','ngRoute']);
+var angularApp = angular.module('cricApi', ['ngResource','ngRoute']);
 
 angularApp.config(function ($routeProvider){
   $routeProvider
@@ -6,14 +6,17 @@ angularApp.config(function ($routeProvider){
     templateUrl: 'pages/main.html',
     controller: 'HomeController'
   })
+
 });
+
+
 angularApp.controller("HomeController",function($resource){
   var vm=this;
-  vm.getCityTemperature = function(){
-    console.log(vm.cityName);
-    var weatherResource = $resource('http://api.openweathermap.org/data/2.5/weather',
-      {q:vm.cityName,appid:'27d43832d2a4adcb97fcbfa23db130aa'});
-    vm.weatherResponse = weatherResource.get();
-    console.log(vm.weatherResponse);
-   }
+  vm.getcricinfo = function(){
+    var cricResource = $resource('http://cricapi.com/api/cricket');
+    vm.cricResponse = cricResource.get().$promise;
+    console.log("varun");
+    console.log(vm.cricResponse);
+};
+  vm.getcricinfo();
 });
