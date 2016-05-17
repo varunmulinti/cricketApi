@@ -10,13 +10,9 @@ angularApp.config(function ($routeProvider){
 });
 
 
-angularApp.controller("HomeController",function($resource){
+angularApp.controller("HomeController",['$resource',function($resource){
   var vm=this;
-  vm.getcricinfo = function(){
     var cricResource = $resource('http://cricapi.com/api/cricket');
-    vm.cricResponse = cricResource.get().$promise;
-    console.log("varun");
+    vm.cricResponse = cricResource.get();
     console.log(vm.cricResponse);
-};
-  vm.getcricinfo();
-});
+}]);
